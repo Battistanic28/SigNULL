@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { fetchUsers } from "./api";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -30,26 +32,28 @@ function App() {
       .catch((err) => console.error("Error fetching users:", err));
   }, []);
 
+  
   return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold">Users</h1>
-      <p>{`Logged in as: ${currUser?.firstName} ${currUser?.lastName}`}</p>
-      <ul>
-        {users.map((user) => (
-          <li key={user.id} className="border p-2 my-2">
-            {user.firstName} {user.lastName}- {user.email}
-          </li>
-        ))}
-      </ul>
-    {!isLoggedIn ? (
+    <Router>
       <>
-        <Login handleLogin={handleLogin} />
-        <Register />
+      <nav>
+        <ul>
+          <li><Link to="/login">Sign in</Link></li>
+          <li><Link to="/register">Create new user</Link></li>
+        </ul>
+      </nav>
+      {isLoggedIn && <div>{`Logged in as: ${currUser.firstName} ${currUser.lastName}`}</div>}
+      {isLoggedIn && <button onClick={handleLogout}>Logout</button>}
       </>
-    ) : <button onClick={handleLogout}>Logout</button>
-    }
-    </div>
+
+      <Routes>
+        {/* <Route path="/" element={<Home />} /> */}
+        <Route path="/login" element={<Login handleLogin={handleLogin}/>} />
+        <Route path="/register" element={<Register />} />
+      </Routes>
+    </Router>
   );
 }
+
 
 export default App;
