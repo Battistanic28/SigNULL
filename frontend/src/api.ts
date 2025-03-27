@@ -24,7 +24,7 @@ export const registerUser = async (data: any): Promise<number | string> => {
 export const loginUser = async (data: any): Promise<{}> => {
   try {
       const response = await api.post("/login", data);
-      return response;
+      return response.data;
   } catch (error: any) {
       return error.response?.data?.message || error.message;
   }

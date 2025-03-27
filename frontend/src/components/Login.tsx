@@ -2,7 +2,7 @@ import { useState } from "react";
 import { TextField, Button, Box, Typography, Container, Paper } from "@mui/material";
 import { loginUser } from "../api";
 
-const Login = () => {
+const Login = ({handleLogin}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -22,7 +22,9 @@ const Login = () => {
       // Define AuthResponse type
       if (typeof result === "object") {
           console.log("Login successful!");
-          console.log(result.data)
+
+          const {access_token, user } = result
+          handleLogin(access_token, user)
       } else {
           setError(result);
       }
