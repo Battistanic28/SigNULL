@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchUsers } from "./api";
+import Login from "./components/Login";
+import Register from "./components/Register";
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -20,6 +22,8 @@ function App() {
           </li>
         ))}
       </ul>
+      <Login />
+      <Register />
     </div>
   );
 }

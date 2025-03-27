@@ -1,9 +1,15 @@
-import { ConflictException, Injectable } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { EntityManager, Repository } from 'typeorm';
 import { User } from './entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
+import * as bcrypt from 'bcrypt';
+import { randomUUID } from 'crypto';
 
 @Injectable()
 export class UsersService {
@@ -27,6 +33,34 @@ export class UsersService {
 
     const user = new User(createUserDto);
     await this.entityManager.save(user);
+  }
+
+  async signIn(email: string, pass: string): Promise<any> {
+    const existingUser = await this.usersRepository.findOne({
+      where: [{ email }],
+    });
+
+    if (!existingUser) {
+      throw new UnauthorizedException('User does not exist');
+    }
+
+    const isPasswordValid = await bcrypt.compare(pass, existingUser.password);
+    if (!isPasswordValid) {
+      throw new UnauthorizedException('Invalid credentials');
+    }
+
+    /**
+     * DEMO PURPOSES ONLY
+     * a true auth service needs to be
+     * developed for a production env.
+     */
+    const mockJwt = randomUUID();
+    /** */
+
+    return {
+      access_token: mockJwt,
+      user: existingUser,
+    };
   }
 
   async findAll() {

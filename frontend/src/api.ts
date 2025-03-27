@@ -11,3 +11,21 @@ export const fetchUsers = async () => {
   const response = await api.get("/users");
   return response.data;
 };
+
+export const registerUser = async (data: any): Promise<number | string> => {
+    try {
+        const response = await api.post("/register", data);
+        return response.status;
+    } catch (error: any) {
+        return error.response?.data?.message || error.message;
+    }
+};
+
+export const loginUser = async (data: any): Promise<{}> => {
+  try {
+      const response = await api.post("/login", data);
+      return response;
+  } catch (error: any) {
+      return error.response?.data?.message || error.message;
+  }
+};
