@@ -1,8 +1,11 @@
 import { useState } from "react";
-import { TextField, Button, Box, Typography, Container, Paper } from "@mui/material";
 import { registerUser } from "../api";
+import { useAuth } from "../hooks/useAuth";
+import './styles.css'
 
 const Register = () => {
+  const { handleLogin } = useAuth();
+
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -36,73 +39,70 @@ const Register = () => {
     const result = await registerUser(formData);
     
     if (typeof result === "number" && result === 201) {
-        console.log("Registration successful!");
+      handleLogin(email, password);
     } else {
-        setError(result);
+      setError(result);
     }
   };
 
   return (
-    <Container maxWidth="xs">
-      <Paper elevation={3} sx={{ padding: 4, marginTop: 8 }}>
-        <Typography variant="h5" gutterBottom align="center">
-          Create a user
-        </Typography>
-        {error && (
-          <Typography color="error" variant="body2" align="center">
-            {error}
-          </Typography>
-        )}
-        <Box component="form" onSubmit={handleSubmit} sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-          <TextField
-            label="First Name"
-            name="firstName"
-            variant="outlined"
-            fullWidth
-            value={formData.firstName}
-            onChange={handleChange}
-          />
-          <TextField
-            label="Last Name"
-            name="lastName"
-            variant="outlined"
-            fullWidth
-            value={formData.lastName}
-            onChange={handleChange}
-          />
-          <TextField
-            label="Email"
-            name="email"
-            type="email"
-            variant="outlined"
-            fullWidth
-            value={formData.email}
-            onChange={handleChange}
-          />
-          <TextField
-            label="Password"
-            name="password"
-            type="password"
-            variant="outlined"
-            fullWidth
-            value={formData.password}
-            onChange={handleChange}
-          />
-          <TextField
-            label="Confirm Password"
-            name="confirmPassword"
-            type="password"
-            variant="outlined"
-            fullWidth
-            value={formData.confirmPassword}
-            onChange={handleChange}
-          />
-          <Button type="submit" variant="contained" color="primary" fullWidth>
-            Register
-          </Button>
-        </Box>
-      </Paper>
-    </Container>
+    <div className="form-container">
+      <h3>Create a user</h3>
+      {error && <p className="error-message">{error}</p>}
+      <form className="form" onSubmit={handleSubmit}>
+        <label htmlFor="firstName">First Name</label>
+        <input
+          id="firstName"
+          name="firstName"
+          type="text"
+          value={formData.firstName}
+          onChange={handleChange}
+          placeholder="Enter your first name"
+        />
+        
+        <label htmlFor="lastName">Last Name</label>
+        <input
+          id="lastName"
+          name="lastName"
+          type="text"
+          value={formData.lastName}
+          onChange={handleChange}
+          placeholder="Enter your last name"
+        />
+        
+        <label htmlFor="email">Email</label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          value={formData.email}
+          onChange={handleChange}
+          placeholder="Enter your email"
+        />
+        
+        <label htmlFor="password">Password</label>
+        <input
+          id="password"
+          name="password"
+          type="password"
+          value={formData.password}
+          onChange={handleChange}
+          placeholder="Enter your password"
+        />
+        
+        <label htmlFor="confirmPassword">Confirm Password</label>
+        <input
+          id="confirmPassword"
+          name="confirmPassword"
+          type="password"
+          value={formData.confirmPassword}
+          onChange={handleChange}
+          placeholder="Confirm your password"
+        />
+        
+        <button type="submit">Register</button>
+      </form>
+    </div>
   );
 };
 
