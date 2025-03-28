@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { getConversation } from "../api";
 import Message from "./Message";
-import NewMessageInput from "./NewMessageInput";
 
 const Chat = ({ chatMembers }) => {
   const [activeChat, setActiveChat] = useState();
@@ -24,7 +23,6 @@ const Chat = ({ chatMembers }) => {
         ) : (
           <p className="chat-empty">This is the beginning of your conversation! 🐣</p>
         )}
-    <NewMessageInput />
     </div>
   );
 };

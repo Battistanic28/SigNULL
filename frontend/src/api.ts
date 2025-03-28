@@ -4,7 +4,6 @@ const API_BASE_URL = "http://localhost:3000";
 
 const api = axios.create({
   baseURL: API_BASE_URL,
-//   withCredentials: true,
 });
 
 export const fetchUsers = async () => {
@@ -13,28 +12,43 @@ export const fetchUsers = async () => {
 };
 
 export const registerUser = async (data: any): Promise<number | string> => {
-    try {
-        const response = await api.post("/register", data);
-        return response.status;
-    } catch (error: any) {
-        return error.response?.data?.message || error.message;
-    }
+  try {
+    const response = await api.post("/register", data);
+    return response.status;
+  } catch (error: any) {
+    return error.response?.data?.message || error.message;
+  }
 };
 
 export const loginUser = async (data: any): Promise<{}> => {
   try {
-      const response = await api.post("/login", data);
-      return response.data;
+    const response = await api.post("/login", data);
+    return response.data;
   } catch (error: any) {
-      return error.response?.data?.message || error.message;
+    return error.response?.data?.message || error.message;
   }
 };
 
-export const getConversation = async (senderId: number, recieverId: number): Promise<{}> => {
+export const getConversation = async (
+  senderId: number,
+  recieverId: number
+): Promise<{}> => {
   try {
     const response = await api.get(`users/${senderId}/messages/${recieverId}`);
     return response.data;
   } catch (error: any) {
     return error.response?.data?.message || error.message;
   }
-}
+};
+
+export const sendMessage = async (
+  senderId: number,
+  body: {"recieverId": number, "content": string}
+): Promise<{}> => {
+  try {
+    const response = await api.post(`users/${senderId}/messages`, body);
+    return response.data;
+  } catch (error: any) {
+    return error.response?.data?.message || error.message;
+  }
+};

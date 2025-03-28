@@ -1,29 +1,34 @@
 import { useState } from "react";
+import { sendMessage } from "../api";
+import { User } from "../types/global";
 
-const NewMessageInput = ({ onSendMessage }: { onSendMessage: (message: string) => void }) => {
-    const [message, setMessage] = useState("");
+const NewMessageInput = ({ chatMembers }: { chatMembers: User[] }) => {
+  const sender = chatMembers[0];
+  const recipient = chatMembers[1];
 
-    const handleSendMessage = () => {
-        if (message.trim() !== "") {
-            onSendMessage(message); // Send message to parent
-            setMessage(""); // Clear input
-        }
-    };
+  const [message, setMessage] = useState("");
 
-    return (
-        <div className="message-input-container">
-            <input
-                type="text"
-                className="message-input"
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                placeholder="Type a message..."
-            />
-            <button className="send-btn" onClick={handleSendMessage}>
-                Send
-            </button>
-        </div>
-    );
+  const handleSendMessage = () => {
+    if (message.trim() !== "") {
+      sendMessage(sender.id, { recieverId: recipient.id, content: message });
+      setMessage("");
+    }
+  };
+
+  return (
+    <div className="message-input-container">
+      <input
+        type="text"
+        className="message-input"
+        value={message}
+        onChange={(e) => setMessage(e.target.value)}
+        placeholder="Type a message..."
+      />
+      <button className="send-btn" onClick={handleSendMessage}>
+        Send
+      </button>
+    </div>
+  );
 };
 
-export default NewMessageInput
+export default NewMessageInput;

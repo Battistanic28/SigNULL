@@ -1,16 +1,28 @@
-import { createContext, useState, useEffect, useContext } from "react";
+import { createContext, useState, useEffect, useContext, ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
+import { User } from "../types/global";
 
-const AuthContext = createContext(null);
+interface MyComponentProps {
+    children: ReactNode;
+  }
 
-export const AuthProvider = ({ children }) => {
+interface AuthContextType {
+    isLoggedIn: boolean;
+    currUser: User | null;
+    handleLogin: (token: string, user: User) => void;
+    handleLogout: () => void;
+  }
+
+const AuthContext = createContext<AuthContextType | null>(null);
+
+export const AuthProvider: React.FC<MyComponentProps> = ({ children }) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [currUser, setCurrUser] = useState(null);
+    const [currUser, setCurrUser] = useState<User | null>(null);
     const navigate = useNavigate();
 
     useEffect(() => {
         const token = localStorage.getItem("access_token");
-        const user = localStorage.getItem("user");
+        const user = localStorage.getItem("user") || "";
 
         if (token) {
             setIsLoggedIn(true);
@@ -18,7 +30,7 @@ export const AuthProvider = ({ children }) => {
         }
     }, []);
 
-    const handleLogin = (token, user) => {
+    const handleLogin = (token: string, user: User) => {
         localStorage.setItem("access_token", token);
         localStorage.setItem("user", JSON.stringify(user));
         setIsLoggedIn(true);

@@ -18,10 +18,12 @@ export class Message {
   @Column()
   receiverId: number;
 
-  @ManyToOne(() => User, (user) => user.sentMessages)
+  @ManyToOne(() => User, (user) => user.sentMessages, { onDelete: 'CASCADE' })
   sender: User;
 
-  @ManyToOne(() => User, (user) => user.receivedMessages)
+  @ManyToOne(() => User, (user) => user.receivedMessages, {
+    onDelete: 'CASCADE',
+  })
   receiver: User;
 
   @Column()
