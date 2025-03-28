@@ -1,13 +1,17 @@
-import { useAuth } from "../hooks/useAuth"
+import Chat from "./Chat"
+import Users from "./Users"
+import './styles.css'
+import { useState } from "react"
 
 const Dashboard = () => {
-    // const { currUser } = useAuth();
-    // const { firstName, lastName } = currUser;
+    const [ chatMembers, setChatMembers] = useState([])
+
     return (
         <>
-        <h1>Dashboard</h1>
-        {/* <p>{`${firstName} ${lastName}`}</p> */}
-        <button>New Conversation</button>
+        <div className="dash-container">
+            <Users setChatMembers={setChatMembers}/>
+            <Chat chatMembers={chatMembers}/>
+        </div>
         </>
     )
 }

@@ -6,7 +6,7 @@ export default function Nav() {
   
   return (
     <nav className="navbar">
-      <div className="nav-title">SigNull</div>
+      <div className="nav-title">Sig&#123;NULL&#125;</div>
       <ul className="nav-links">
         {!isLoggedIn ? (
           <>

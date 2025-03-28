@@ -29,3 +29,12 @@ export const loginUser = async (data: any): Promise<{}> => {
       return error.response?.data?.message || error.message;
   }
 };
+
+export const getConversation = async (senderId: number, recieverId: number): Promise<{}> => {
+  try {
+    const response = await api.get(`users/${senderId}/messages/${recieverId}`);
+    return response.data;
+  } catch (error: any) {
+    return error.response?.data?.message || error.message;
+  }
+}
