@@ -9,7 +9,7 @@ import { EntityManager, Repository } from 'typeorm';
 import { User } from './entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
-import { randomUUID } from 'crypto';
+import { v4 as uuid } from 'uuid';
 
 @Injectable()
 export class UsersService {
@@ -54,7 +54,7 @@ export class UsersService {
      * a true auth service needs to be
      * developed for a production env.
      */
-    const mockJwt = randomUUID();
+    const mockJwt = uuid();
     /** */
 
     return {
