@@ -1,29 +1,34 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useParams, Link } from "react-router-dom";
 import { getConversation } from "../api";
 import Message from "./Message";
+import './styles.css'
 
-const Chat = ({ chatMembers }) => {
-  const [activeChat, setActiveChat] = useState();
+const Chat = () => {
+  const { senderId, recieverId } = useParams();
+  const [chat, setChat] = useState();
+
   useEffect(() => {
-    const sender = chatMembers[0];
-    const reciever = chatMembers[1];
     const fetchConversation = async () => {
-      const chat = await getConversation(sender.id, reciever.id);
-      setActiveChat(chat);
+      setChat(await getConversation(senderId, recieverId));
     };
+
     fetchConversation();
-  }, [chatMembers]);
+  }, [recieverId, senderId]);
 
   return (
-    <div className="chat-container">
-        {activeChat && activeChat.length !== 0 ? (
-          activeChat.map((message) => (
-              <Message message={message} chatMembers={chatMembers} />
-          ))
-        ) : (
-          <p className="chat-empty">This is the beginning of your conversation! 🐣</p>
-        )}
-    </div>
+    <>
+    {chat && chat.length > 0 ? (
+      chat.map((message) => (
+        <Message key={message.id} message={message} />
+      ))
+    ) : (
+      <p className="default-message">No messages yet. Start a conversation!</p>
+    )}
+    <button className="return-btn">
+      <Link to="/">Back to Dashboard</Link>
+    </button>
+  </>
   );
 };
 

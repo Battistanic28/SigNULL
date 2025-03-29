@@ -14,7 +14,9 @@ export default function Nav() {
             <li><a href="/register" className="nav-item">Register</a></li>
           </>
          ) :
-        <li><button onClick={handleLogout} className="nav-item logout-btn">Logout</button></li>
+         <>
+          <li><button onClick={handleLogout} className="nav-item logout-btn">Logout</button></li>
+         </>
         }
       </ul>
     </nav>

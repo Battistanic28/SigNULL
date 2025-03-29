@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+// TODO: Create API type definitions
 import axios from "axios";
 
 const API_BASE_URL = "http://localhost:3000";
@@ -20,7 +22,7 @@ export const registerUser = async (data: any): Promise<number | string> => {
   }
 };
 
-export const loginUser = async (data: any): Promise<{}> => {
+export const loginUser = async (data: any): Promise<any> => {
   try {
     const response = await api.post("/login", data);
     return response.data;
@@ -32,7 +34,7 @@ export const loginUser = async (data: any): Promise<{}> => {
 export const getConversation = async (
   senderId: number,
   recieverId: number
-): Promise<{}> => {
+): Promise<any> => {
   try {
     const response = await api.get(`users/${senderId}/messages/${recieverId}`);
     return response.data;
@@ -43,8 +45,8 @@ export const getConversation = async (
 
 export const sendMessage = async (
   senderId: number,
-  body: {"recieverId": number, "content": string}
-): Promise<{}> => {
+  body: {"recieverId": number | string, "content": string}
+): Promise<any> => {
   try {
     const response = await api.post(`users/${senderId}/messages`, body);
     return response.data;
