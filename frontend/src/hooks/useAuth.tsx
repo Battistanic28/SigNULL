@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect, useContext, ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
+import { UserType } from "../types/global";
 
 interface MyComponentProps {
     children: ReactNode;
@@ -7,8 +8,8 @@ interface MyComponentProps {
 
 interface AuthContextType {
     isLoggedIn: boolean;
-    currUser: User | null;
-    handleLogin: (token: string, user: User) => void;
+    currUser: UserType | null;
+    handleLogin: (token: string, user: UserType) => void;
     handleLogout: () => void;
   }
 
@@ -16,7 +17,7 @@ const AuthContext = createContext<AuthContextType | null>(null);
 
 export const AuthProvider: React.FC<MyComponentProps> = ({ children }) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [currUser, setCurrUser] = useState<User | null>(null);
+    const [currUser, setCurrUser] = useState<UserType | null>(null);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -29,7 +30,7 @@ export const AuthProvider: React.FC<MyComponentProps> = ({ children }) => {
         }
     }, []);
 
-    const handleLogin = (token: string, user: User) => {
+    const handleLogin = (token: string, user: UserType) => {
         sessionStorage.setItem("access_token", token);
         sessionStorage.setItem("user", JSON.stringify(user));
         setIsLoggedIn(true);
