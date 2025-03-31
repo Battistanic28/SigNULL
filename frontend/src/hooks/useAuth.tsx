@@ -1,6 +1,5 @@
 import { createContext, useState, useEffect, useContext, ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
-import { User } from "../types/global";
 
 interface MyComponentProps {
     children: ReactNode;

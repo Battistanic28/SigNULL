@@ -1,9 +1,9 @@
 import Users from "./Users";
 import "./styles.css";
-import { User } from "../types/global";
+import { UserType } from "../types/global";
 import NewMessage from "./NewMessage";
 
-const Dashboard = ({users}: {users:User[]}) => {
+const Dashboard = ({users}: {users:UserType[]}) => {
 
   return (
     <>

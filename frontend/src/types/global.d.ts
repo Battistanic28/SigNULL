@@ -1,5 +1,5 @@
 
-export interface User {
+export interface UserType {
       id: number;
       firstName: string;
       lastName: string;
@@ -7,3 +7,11 @@ export interface User {
       password: string;
       isAdmin: boolean;
     }
+
+export interface MessageType {
+  id: number;
+  senderId: number;
+  recieverId: number;
+  content: string;
+  createdAt: Date;
+}

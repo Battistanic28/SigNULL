@@ -1,7 +1,8 @@
 import { useAuth } from '../hooks/useAuth'
+import { MessageType } from '../types/global'
 import './styles.css'
 
-const Message = ({ message, recieverName }) => {
+const Message = ({ message, recieverName }: {message: MessageType, recieverName: string}) => {
     const { currUser } = useAuth()
     const isCurrentUserMessage = currUser.id === message.senderId;
     const messageOwnerName = isCurrentUserMessage ? "Me:" : `${recieverName}:`

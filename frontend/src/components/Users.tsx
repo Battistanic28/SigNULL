@@ -1,19 +1,17 @@
-import { useState, useEffect } from "react";
-import { fetchUsers } from "../api";
 import { useAuth } from "../hooks/useAuth";
-import { User } from "../types/global";
+import { UserType } from "../types/global";
 import { Link } from "react-router-dom";
 
 
 
-const Users = ({ users }: {users:User[]}) => {
+const Users = ({ users }: {users:UserType[]}) => {
   const { currUser } = useAuth()
 
   return (
     <div className="users-container">
       <div className="users-title">My Friends</div>
       <ul>
-        {users.map((user: User) => {
+        {users.map((user: UserType) => {
           if (user.id !== currUser.id) {
             return (
               <li className="users-item" key={user.id}>

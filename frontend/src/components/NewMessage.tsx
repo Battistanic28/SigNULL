@@ -1,10 +1,10 @@
-import { User } from "../types/global";
+import { UserType } from "../types/global";
 import { sendMessage } from "../api";
 import { useState } from "react";
 import { useAuth } from "../hooks/useAuth";
 import './styles.css'
 
-const NewMessage = ({ users }: { users: User[] }) => {
+const NewMessage = ({ users }: { users: UserType[] }) => {
     const { currUser } = useAuth()
     const [recipient, setRecipient] = useState(users.length > 0 ? users[0].id : "");
     const [message, setMessage] = useState("")
