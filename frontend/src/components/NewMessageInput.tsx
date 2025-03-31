@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { sendMessage } from "../api";
-import { User } from "../types/global";
+import { UserType } from "../types/global";
 
-const NewMessageInput = ({ chatMembers }: { chatMembers: User[] }) => {
+const NewMessageInput = ({ chatMembers }: { chatMembers: UserType[] }) => {
   const sender = chatMembers[0];
   const recipient = chatMembers[1];
 
