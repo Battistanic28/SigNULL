@@ -27,7 +27,7 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/chat/:senderId/:recieverId" element={<Chat />} />
+        <Route path="/chat/:senderId/:recieverId/:recieverName" element={<Chat />} />
         <Route path="/" element={currUser ? <Dashboard users={users} /> : <Navigate to="/login" />} />
       </Routes>
     </>

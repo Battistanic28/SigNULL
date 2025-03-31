@@ -5,7 +5,7 @@ import Message from "./Message";
 import './styles.css'
 
 const Chat = () => {
-  const { senderId, recieverId } = useParams();
+  const { senderId, recieverId, recieverName } = useParams();
   const [chat, setChat] = useState();
 
   useEffect(() => {
@@ -20,7 +20,7 @@ const Chat = () => {
     <>
     {chat && chat.length > 0 ? (
       chat.map((message) => (
-        <Message key={message.id} message={message} />
+        <Message key={message.id} message={message} recieverName={recieverName}/>
       ))
     ) : (
       <p className="default-message">No messages yet. Start a conversation!</p>
