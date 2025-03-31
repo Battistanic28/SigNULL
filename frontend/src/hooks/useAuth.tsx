@@ -21,8 +21,8 @@ export const AuthProvider: React.FC<MyComponentProps> = ({ children }) => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const token = localStorage.getItem("access_token");
-        const user = localStorage.getItem("user") || "";
+        const token = sessionStorage.getItem("access_token");
+        const user = sessionStorage.getItem("user") || "";
 
         if (token) {
             setIsLoggedIn(true);
@@ -31,15 +31,15 @@ export const AuthProvider: React.FC<MyComponentProps> = ({ children }) => {
     }, []);
 
     const handleLogin = (token: string, user: User) => {
-        localStorage.setItem("access_token", token);
-        localStorage.setItem("user", JSON.stringify(user));
+        sessionStorage.setItem("access_token", token);
+        sessionStorage.setItem("user", JSON.stringify(user));
         setIsLoggedIn(true);
         setCurrUser(user);
         navigate("/");
     };
 
     const handleLogout = () => {
-        localStorage.clear();
+        sessionStorage.clear();
         setIsLoggedIn(false);
         setCurrUser(null);
         navigate("/login");

@@ -16,7 +16,7 @@ services:
     ports:
       - "3000:3000"
     environment:
-      DATABASE_URL: postgres://user:password@db:5432/mydb
+      DATABASE_URL: postgres://root:mypassword@maiven_messenger_db:5432/maiven_messenger_db
     depends_on:
       - postgres
 
