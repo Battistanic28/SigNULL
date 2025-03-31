@@ -21,7 +21,7 @@ From directory root,
 
 🟢 start container: 
 ```bash
-docker-compose up
+docker-compose up --build
 ```
 View app at: http://localhost:5173 🚀
 
