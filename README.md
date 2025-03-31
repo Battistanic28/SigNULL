@@ -46,9 +46,9 @@ docker-compose down
 Since this is a demo application, I will share a set of environment variables that can be used to interact with the database locally.
 
 ```
-    POSTGRES_HOST=localhost
+    POSTGRES_HOST=postgres
     POSTGRES_PORT=5432
-    POSTGRES_DB=maiven_messenger_db
+    POSTGRES_DB=messenger_db
     POSTGRES_USER=root
     POSTGRES_PASSWORD=mypassword
     POSTGRES_SYNC=false
