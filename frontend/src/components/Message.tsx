@@ -1,10 +1,10 @@
 import { useAuth } from '../hooks/useAuth'
 import './styles.css'
 
-const Message = ({ message }) => {
+const Message = ({ message, recieverName }) => {
     const { currUser } = useAuth()
     const isCurrentUserMessage = currUser.id === message.senderId;
-    const messageOwnerName = isCurrentUserMessage ? "Me:" : "You:"
+    const messageOwnerName = isCurrentUserMessage ? "Me:" : `${recieverName}:`
 
     return (
         <div className={`chat-bubble ${isCurrentUserMessage ? "sent" : "received"}`}>

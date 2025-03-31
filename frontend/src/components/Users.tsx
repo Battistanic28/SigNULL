@@ -18,7 +18,7 @@ const Users = ({ users }: {users:User[]}) => {
             return (
               <li className="users-item" key={user.id}>
                 <button className="users-btn">
-                  <Link to={`/chat/${currUser.id}/${user.id}`}>{`${user.firstName} ${user.lastName}`}</Link>
+                  <Link to={`/chat/${currUser.id}/${user.id}/${user.firstName}`}>{`${user.firstName} ${user.lastName}`}</Link>
                 </button>
               </li>
             );
