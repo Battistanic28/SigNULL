@@ -10,10 +10,22 @@ Sig{NULL} Messenger provides the scaffolding for a simple user management applic
 - TypeORM
 
 ### TODO:
-- I did not complete the standalone Notification Sender Service.
-- Type definitions are pretty messy, especially on the frontend
+- Build standalone Notification Sender Service.
+- Clean up type definitions, add definition where type is "any"
 - Add unit testing
 - Add real JWT authentication
+
+## API Documentation:
+- GET: /users
+- GET: /users/:id
+- DELETE: /users/:id
+- POST: /register
+- GET: /users/:id/messages
+- POST: /users/:id/messages
+
+View the docs or experiement with the endpoints at the Postman workspace provided below.
+
+[<img src="https://run.pstmn.io/button.svg" alt="Run In Postman" style="width: 128px; height: 32px;">](https://app.getpostman.com/run-collection/11559675-8b6362b3-e691-450e-b78d-a1c1260f5c28?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D11559675-8b6362b3-e691-450e-b78d-a1c1260f5c28%26entityType%3Dcollection%26workspaceId%3Db9a50d8f-47b6-498a-8388-182fa78e1dbf)
 
 
 ## Run the App (Docker)
@@ -52,18 +64,6 @@ npm install
 npm run start:dev
 ```
 Server runs on http://localhost:3000/
-
-## Endpoints:
-- GET: /users
-- GET: /users/:id
-- DELETE: /users/:id
-- POST: /register
-- GET: /users/:id/messages
-- POST: /users/:id/messages
-
-View the docs or experiement with the endpoints at the Postman workspace provided below.
-
-[<img src="https://run.pstmn.io/button.svg" alt="Run In Postman" style="width: 128px; height: 32px;">](https://app.getpostman.com/run-collection/11559675-8b6362b3-e691-450e-b78d-a1c1260f5c28?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D11559675-8b6362b3-e691-450e-b78d-a1c1260f5c28%26entityType%3Dcollection%26workspaceId%3Db9a50d8f-47b6-498a-8388-182fa78e1dbf)
 
 ## Frontend (running locally)
 From directory root,

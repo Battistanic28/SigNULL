@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { createContext, useState, useEffect, useContext, ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserType } from "../types/global";
@@ -6,14 +7,7 @@ interface MyComponentProps {
     children: ReactNode;
   }
 
-interface AuthContextType {
-    isLoggedIn: boolean;
-    currUser: UserType | null;
-    handleLogin: (token: string, user: UserType) => void;
-    handleLogout: () => void;
-  }
-
-const AuthContext = createContext<AuthContextType | null>(null);
+const AuthContext = createContext<any>(null);
 
 export const AuthProvider: React.FC<MyComponentProps> = ({ children }) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
