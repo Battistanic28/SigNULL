@@ -14,7 +14,6 @@ import { Message } from 'src/resources/entities/messages.entity';
         database: configService.getOrThrow('POSTGRES_DB'),
         username: configService.getOrThrow('POSTGRES_USER'),
         password: configService.getOrThrow('POSTGRES_PASSWORD'),
-        // autoLoadEntities: true,
         entities: [User, Message],
         synchronize: configService.getOrThrow('POSTGRES_SYNC'),
       }),
