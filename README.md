@@ -33,8 +33,10 @@ From directory root,
 
 🟢 start container: 
 ```bash
-docker-compose up --build
+docker rm messenger_db
+docker-compose down -v && docker-compose up --build
 ```
+
 View app at: http://localhost:5173 🚀
 
 🔴 stop container: 
@@ -46,18 +48,26 @@ docker-compose down
 Since this is a demo application, I will share a set of environment variables that can be used to interact with the database locally.
 
 ```
-    POSTGRES_HOST=postgres
-    POSTGRES_PORT=5432
+    POSTGRES_HOST=localhost
+    POSTGRES_PORT=5433
     POSTGRES_DB=messenger_db
     POSTGRES_USER=root
     POSTGRES_PASSWORD=mypassword
-    POSTGRES_SYNC=false
+    POSTGRES_SYNC=true
 ```
 create a `.env` file in the root of the backend directory. Copy the values above into your new `.env` file and save changes.
 
 From directory root,
-
+1. Start database
 ```bash
+source. env
+cd backend
+docker rm messenger_db
+docker-compose down -v && docker-compose up --build
+```
+2. Start server
+```bash
+# In a seperate terminal
 source. env
 cd backend
 npm install
